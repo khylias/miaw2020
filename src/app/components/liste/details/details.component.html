@@ -1,5 +1,7 @@
+<h3>{{ joueurSelectionne.firstName}} {{ joueurSelectionne.lastName | uppercase }}</h3>
+<p> {{ joueurSelectionne.birthdayDate | age }} </p>
 <p>
-  {{ joueurSelectionne.firstName}} {{ joueurSelectionne.lastName }} né le {{ joueurSelectionne.birthdayDate | date: "longDate":"":"fr"  }},
+  Il est né le {{ joueurSelectionne.birthdayDate | date: "longDate":"":"fr"  }},
   avec une taille de {{ joueurSelectionne.taille }}, joue au poste de {{ joueurSelectionne.poste }}
 </p>
 

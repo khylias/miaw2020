@@ -6,4 +6,5 @@ export interface Joueur {
   taille?: string;
   absent?: boolean;
   birthdayDate?: string;
+  profilPicture?: string;
 }

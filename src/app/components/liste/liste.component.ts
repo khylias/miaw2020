@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Joueur } from './../../models';
-import { Logs } from 'selenium-webdriver';
+
+import { NgxSmartModalService } from 'ngx-smart-modal';
 @Component({
   selector: 'app-liste',
   templateUrl: './liste.component.html',
@@ -12,7 +13,7 @@ export class ListeComponent implements OnInit {
   public selected: Joueur;
   public openDetail = false;
 
-  constructor() { }
+  constructor(private ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
     this.loadJoueurs();
@@ -27,7 +28,8 @@ export class ListeComponent implements OnInit {
         poste: '3eme ligne',
         taille: '1m60',
         birthdayDate: '1990-10-12',
-        absent: true
+        absent: true,
+        profilPicture: 'https://www.staderochelais.com/sites/stade-rochelais/files/styles/squared_persona/public/persona/profil/botia-1538408110.png?itok=31LR2fNd'
       },
       {
         id: 'j2',
@@ -36,7 +38,8 @@ export class ListeComponent implements OnInit {
         poste: 'Pillier',
         taille: '1m80',
         birthdayDate: '1989-03-30',
-        absent: false
+        absent: false,
+        profilPicture: 'https://www.staderochelais.com/sites/stade-rochelais/files/styles/squared_persona/public/persona/profil/corbel-1538407568.png?itok=WTGDTTLg'
       },
       {
         id: 'j2',
@@ -45,12 +48,14 @@ export class ListeComponent implements OnInit {
         poste: 'Pillier',
         taille: '1m94',
         birthdayDate: '1985-06-18',
-        absent: false
+        absent: false,
+        profilPicture: 'https://www.staderochelais.com/sites/stade-rochelais/files/styles/squared_persona/public/persona/profil/boughanmi-1538407931.png?itok=ZDwRJGR_'
       }
     );
   }
 
   public select(j: Joueur) {
+    this.ngxSmartModalService.open('detailsModal');
     this.openDetail = this.openDetail && this.selected !== j ? this.openDetail : !this.openDetail;
     this.selected = j;
   }

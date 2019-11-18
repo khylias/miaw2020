@@ -1,9 +1,17 @@
-<ul>
-  <li *ngFor="let joueur of joueurs" [ngClass]="{'is-absent': joueur.absent}">
-    {{ joueur.firstName }} {{ joueur.lastName }}
+<section class="container">
+  <mat-card *ngFor="let joueur of joueurs" [ngClass]="{'is-absent': joueur.absent}"  class="card-player">
+    <mat-card-header>
+      <mat-card-title>{{ joueur.firstName }} {{ joueur.lastName | uppercase }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image [src]="joueur.profilPicture">
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" type="button" (click)="select(joueur)">Détails</button>
+    </mat-card-actions>
+  </mat-card>
+</section>
 
-    <button type="button" (click)="select(joueur)">Afficher les détails</button>
-  </li>
-</ul>
-
-<app-details [joueurSelectionne]="selected" *ngIf="openDetail" (changeState)="setPresentState($event)"></app-details>
+<ngx-smart-modal identifier="detailsModal">
+  <app-details [joueurSelectionne]="selected" *ngIf="openDetail" (changeState)="setPresentState($event)"></app-details>
+</ngx-smart-modal>
