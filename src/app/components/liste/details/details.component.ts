@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
-import { Joueur } from './../../../models';
+import { Player } from './../../../models';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  @Input() joueurSelectionne: Joueur;
+  @Input() joueurSelectionne: Player;
   @Output() changeState: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }

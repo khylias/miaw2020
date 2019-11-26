@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Joueur } from './../../models';
+import { Player } from './../../models';
 
 import { NgxSmartModalService } from 'ngx-smart-modal';
 @Component({
@@ -9,8 +9,8 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
   styleUrls: ['./liste.component.scss']
 })
 export class ListeComponent implements OnInit {
-  public joueurs: Joueur[] = [];
-  public selected: Joueur;
+  public joueurs: Player[] = [];
+  public selected: Player;
   public openDetail = false;
 
   constructor(private ngxSmartModalService: NgxSmartModalService) { }
@@ -54,7 +54,7 @@ export class ListeComponent implements OnInit {
     );
   }
 
-  public select(j: Joueur) {
+  public select(j: Player) {
     this.ngxSmartModalService.open('detailsModal');
     this.openDetail = this.openDetail && this.selected !== j ? this.openDetail : !this.openDetail;
     this.selected = j;

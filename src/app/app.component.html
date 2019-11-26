@@ -1,1 +1,5 @@
-<app-liste></app-liste>
+<ul>
+    <li *ngFor="let player of players">
+        <app-player-item [player]="player"></app-player-item>
+    </li>
+</ul>
