@@ -1,3 +1,6 @@
-{{ player.firstName }} {{ player.lastName }}
-<button type="button" (click)="selectPlayer()">Choisir</button>
-<span *ngIf="isSelected">Selectionné !</span>
+<mat-card>
+    <mat-card-title>{{ player.lastName | uppercase }} </mat-card-title>
+    <mat-card-subtitle>{{ player.firstName }} </mat-card-subtitle>
+    {{ player.birthdayDate | age }}
+    <button mat-flat-button type="button" (click)="selectPlayer()" [appMarkSelect]="isSelected">Choisir</button>
+</mat-card>

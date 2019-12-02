@@ -11,7 +11,7 @@ export class AppComponent {
     {
       id: 'j1',
       firstName: 'Levani',
-      lastName: 'BOTIA',
+      lastName: 'Botia',
       poste: '3eme ligne',
       taille: '1m60',
       birthdayDate: '1990-10-12',
@@ -21,7 +21,7 @@ export class AppComponent {
     {
       id: 'j2',
       firstName: 'Mohamed',
-      lastName: 'BOUGHANMI',
+      lastName: 'Boughani',
       poste: 'Pillier',
       taille: '1m94',
       birthdayDate: '1985-06-18',
