@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <label for="name">Nom de l'équipe</label>
+    <input type="text" id="name" formControlName="name">
+    <p *ngIf="form.get('name').hasError('required') && (form.get('name').dirty || form.get('name').touched)">Le nom de l'équipe est obligatoire.</p>
+    <p *ngIf="form.get('name').hasError('minlength')">Le nom doit comporter au minimum {{ form.get('name').getError('minlength').requiredLength }} caractères.</p>
+    {{ form.get('name').errors | json }}
+    <div formArrayName="players">
+        <div *ngFor="let playerGroup of players.controls; let i = index;" [formGroup]="playerGroup">
+            <label for="firstName">Prénom</label>
+            <input type="text" id="firstName" formControlName="firstName">
+
+            <label for="lastName">Nom</label>
+            <input type="text" id="lastName" formControlName="lastName">
+            <button type="button" (click)="removePlayer(i)">Supprimer</button>
+        </div>
+    </div>
+    <button type="button" (click)="addPlayer()">Ajouter</button>
+
+    <button type="submit" [disabled]="form.invalid">Valider</button>
+</form>
+{{ form.value | json }}

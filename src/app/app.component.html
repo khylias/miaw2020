@@ -3,3 +3,11 @@
         <app-player-item [player]="player"></app-player-item>
     </li>
 </ul>
+
+<ul>
+    <li *ngFor="let team of teams">
+        <app-team-item [team]="team"></app-team-item>
+    </li>
+</ul>
+
+<app-team-form></app-team-form>

@@ -1,3 +1,4 @@
+import { Team } from './models/team';
 import { Component } from '@angular/core';
 
 import { Player } from './models/player';
@@ -27,6 +28,13 @@ export class AppComponent {
       birthdayDate: '1985-06-18',
       absent: false,
       profilPicture: 'https://www.staderochelais.com/sites/stade-rochelais/files/styles/squared_persona/public/persona/profil/boughanmi-1538407931.png?itok=ZDwRJGR_'
+    }
+  ];
+
+  public teams: Team[] = [
+    {
+      name: 'Stade 1',
+      players: []
     }
   ];
 }
