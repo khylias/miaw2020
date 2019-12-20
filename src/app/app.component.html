@@ -1,13 +1,3 @@
-<ul>
-    <li *ngFor="let player of players">
-        <app-player-item [player]="player"></app-player-item>
-    </li>
-</ul>
-
-<ul>
-    <li *ngFor="let team of teams">
-        <app-team-item [team]="team"></app-team-item>
-    </li>
-</ul>
-
-<app-team-form></app-team-form>
+<a routerLink="/">Accueil</a>
+<a routerLink="/equipe/nouveau">Nouveau</a>
+<router-outlet></router-outlet>

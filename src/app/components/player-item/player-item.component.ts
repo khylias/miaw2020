@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { FormManagerService } from 'src/app/services';
+
 @Component({
   selector: 'app-player-item',
   templateUrl: './player-item.component.html',
@@ -10,7 +12,7 @@ export class PlayerItemComponent implements OnInit {
 
   public isSelected = false;
 
-  constructor() { }
+  constructor(private formManagerService: FormManagerService) { }
 
   ngOnInit() {
     console.log(this.player);
@@ -18,5 +20,6 @@ export class PlayerItemComponent implements OnInit {
 
   public selectPlayer(): void {
     this.isSelected = !this.isSelected;
+    this.formManagerService.select(this.player);
   }
 }
