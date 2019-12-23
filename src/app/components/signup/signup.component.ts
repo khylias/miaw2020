@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-import { ApiService } from 'src/app/services';
+import { ApiService, TokenStorageService } from 'src/app/services';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services';
 export class SignupComponent implements OnInit {
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) { }
+  constructor(private fb: FormBuilder, private apiService: ApiService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
   public signup(): void {
     this.apiService.signup(this.form.value).subscribe(res => {
       console.log('user created !');
+      this.tokenStorageService.setToken(res.jwt);
     });
   }
 

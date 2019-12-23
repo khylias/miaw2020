@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { ApiService, TokenStorageService } from 'src/app/services';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private apiService: ApiService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -23,7 +25,9 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-
+    this.apiService.login(this.form.value).subscribe(res => {
+      this.tokenStorageService.setToken(res.jwt);
+    });
   }
 
 }

@@ -4,7 +4,7 @@ import { registerLocaleData, CommonModule } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,12 +18,14 @@ import { PlayerItemComponent } from './components/player-item/player-item.compon
 import { MarkSelectDirective } from './directives/mark-select.directive';
 import { TeamItemComponent } from './components/teams/team-item/team-item.component';
 import { TeamFormComponent } from './components/teams/team-form/team-form.component';
-import { ApiService, FormManagerService, TokenStorageService } from './services';
-
-import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ApiService, FormManagerService, TokenStorageService, AppInterceptorService } from './services';
+
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { Ng2Webstorage } from '@rars/ngx-webstorage';
+import { AuthGuard } from './guards';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -49,6 +51,10 @@ registerLocaleData(localeFr, 'fr');
 
 
     NgxSmartModalModule.forRoot(),
+    Ng2Webstorage.forRoot({
+      prefix: 'miaw',
+      separator: '.',
+    }),
 
     MatCardModule,
     MatButtonModule,
@@ -57,8 +63,14 @@ registerLocaleData(localeFr, 'fr');
   ],
   providers: [
     ApiService,
+    AuthGuard,
     FormManagerService,
-    TokenStorageService
+    TokenStorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptorService,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })
