@@ -1,7 +1,46 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { HomeComponent } from './components/home/home.component';
+import { TeamFormComponent } from './components/teams/team-form/team-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { AccountComponent } from './components/account/account.component';
+import { AuthGuard } from './guards';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'connexion',
+    component: LoginComponent
+  },
+  {
+    path: 'inscription',
+    component: SignupComponent
+  },
+  {
+    path: 'compte',
+    canActivate: [AuthGuard],
+    component: AccountComponent
+  },
+  {
+    path: 'equipe',
+    children: [
+      {
+        path: 'nouveau',
+        canActivate: [AuthGuard],
+        component: TeamFormComponent
+      },
+      {
+        path: ':id',
+        component: TeamFormComponent
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

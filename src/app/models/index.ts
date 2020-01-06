@@ -1,1 +1,2 @@
-export * from './joueur';
+export * from './player';
+export * from './team';

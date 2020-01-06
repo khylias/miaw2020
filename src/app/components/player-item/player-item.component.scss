@@ -1,0 +1,19 @@
+.avatar {
+    background-size: cover;
+    background-color: white;
+}
+
+.is-select {
+    background-color: #3f51b5;
+    
+    .player-item-title,
+    .player-item-subtitle {
+        color: white;
+    }
+}
+
+.player-item {
+    &:hover {
+        cursor: pointer;
+    }
+}

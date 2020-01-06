@@ -1,1 +1,15 @@
-<app-liste></app-liste>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <a mat-flat-button color="primary" routerLink="/"><h1>MIAW Manager</h1></a>
+        <span class="spacer"></span>
+        <div class="menu">
+            <a mat-flat-button color="primary" routerLink="/equipe/nouveau"  *ngIf="tokenStorageService.isAuthenticate()">Nouveau</a>
+            <a mat-flat-button color="primary" routerLink="/compte" *ngIf="tokenStorageService.isAuthenticate()">Mon compte</a>
+            <button mat-flat-button color="primary" type="button" *ngIf="tokenStorageService.isAuthenticate()" (click)="disconnect()">Se déconnecter</button>
+            <a mat-flat-button color="primary" routerLink="/connexion" *ngIf="!tokenStorageService.isAuthenticate()">Se connecter</a>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="siimple-content--large">
+    <router-outlet></router-outlet>
+</div>

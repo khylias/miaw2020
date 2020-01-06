@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+        <mat-label for="name">Nom de l'équipe</mat-label>
+        <input matInput type="text" id="name" formControlName="name">
+        <mat-error
+            *ngIf="form.get('name').hasError('required') && (form.get('name').dirty || form.get('name').touched)">
+            Le nom de l'équipe est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="form.get('name').hasError('minlength')">
+            Le nom doit comporter au minimum {{ form.get('name').getError('minlength').requiredLength }} caractères.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label for="cover">Bannière</mat-label>
+        <input matInput #coverInput type="text" id="cover" formControlName="cover">
+        <img [src]="coverInput.value" alt="">
+    </mat-form-field>
+    <!-- <div formArrayName="players">
+        <div *ngFor="let playerGroup of players.controls; let i = index;" [formGroup]="playerGroup">
+            <mat-form-field appearance="outline">
+                <mat-label for="firstName">Prénom</mat-label>
+                <input matInput type="text" id="firstName" formControlName="firstName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label for="lastName">Nom</mat-label>
+                <input matInput type="text" id="lastName" formControlName="lastName">
+            </mat-form-field>
+            <button mat-flat-button color="primary" type="button" (click)="removePlayer(i)">Supprimer</button>
+        </div>
+    </div> -->
+
+    <div class="players">
+        <app-player-item [player]="player" class="player-item" *ngFor="let player of availablePlayers;" [isSelected]="isInTeam(player.id)">
+        </app-player-item>
+    </div>
+    <!-- <button mat-flat-button color="primary" type="button" (click)="addPlayer()">Ajouter</button> -->
+
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Valider</button>
+    <button mat-flat-button color="warn" type="button" (click)="delete()">Supprimer</button>
+</form>

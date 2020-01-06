@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="signup()">
+    <mat-form-field appearance="outline">
+        <mat-label for="username">Pseudo</mat-label>
+        <input matInput type="text" id="username" formControlName="username">
+        <mat-error
+            *ngIf="form.get('username').hasError('required') && (form.get('username').dirty || form.get('username').touched)">
+            Un pseudonyme est obligatoire.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label for="email">Email</mat-label>
+        <input matInput type="email" id="email" formControlName="email">
+        <mat-error
+            *ngIf="form.get('email').hasError('required') && (form.get('email').dirty || form.get('email').touched)">
+            Un email est obligatoire.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label for="password">Mot de passe</mat-label>
+        <input matInput type="password" id="password" formControlName="password">
+        <mat-error
+            *ngIf="form.get('password').hasError('required') && (form.get('password').dirty || form.get('password').touched)">
+            Un mot de passe est obligatoire.
+        </mat-error>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</button>
+    <a mat-stroked-button appareance="underline" routerLink="/connexion">Déjà un compte ? Connectez-vous</a>
+</form>

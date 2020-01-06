@@ -1,9 +1,0 @@
-<ul>
-  <li *ngFor="let joueur of joueurs" [ngClass]="{'is-absent': joueur.absent}">
-    {{ joueur.firstName }} {{ joueur.lastName }}
-
-    <button type="button" (click)="select(joueur)">Afficher les détails</button>
-  </li>
-</ul>
-
-<app-details [joueurSelectionne]="selected" *ngIf="openDetail" (changeState)="setPresentState($event)"></app-details>

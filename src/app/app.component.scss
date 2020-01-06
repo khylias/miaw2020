@@ -1,0 +1,22 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.menu {
+  a {
+    color: white;
+    padding: 5px;
+  }
+}
+
+app-player-item {
+    width: 33%;
+    height: 100%;
+    margin-bottom: 5px;
+    padding: 5px;
+
+    img {
+        display: block;
+        width: 100%;
+    }
+}
