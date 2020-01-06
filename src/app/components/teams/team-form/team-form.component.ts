@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Player } from './../../../models';
 import { ApiService, FormManagerService } from 'src/app/services';
@@ -21,6 +21,7 @@ export class TeamFormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private apiService: ApiService,
+    private router: Router,
     private formManagerService: FormManagerService) { }
 
   ngOnInit() {
@@ -31,7 +32,8 @@ export class TeamFormComponent implements OnInit {
     this.getData();
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      players: this.fb.array([])
+      players: this.fb.array([]),
+      cover: ['']
     });
 
     this.formManagerService.selected.subscribe(playerAdded => {
@@ -82,13 +84,21 @@ export class TeamFormComponent implements OnInit {
       this.apiService.getTeamById(this.route.snapshot.paramMap.get('id')).subscribe(res => {
         this.form.patchValue({
           name: res.name,
-          players: res.players.map(player => this.fb.group({
-            id: [player.id],
-            firstName: [player.firstName],
-            lastName: [player.lastName]
-          }))
+          cover: res.cover,
         });
+        res.players.forEach(player => this.addPlayer(player));
+        console.log(this.form.value);
       });
     }
+  }
+
+  public isInTeam(id): boolean {
+    return this.players.value.find(player => player.id === id);
+  }
+
+  public delete(): void {
+    this.apiService.deleteTeam(this.route.snapshot.paramMap.get('id')).subscribe(res => {
+      this.router.navigate(['/']);
+    });
   }
 }

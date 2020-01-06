@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { of, Observable } from 'rxjs';
+import { Observable, ObservedValueOf } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,9 @@ export class ApiService {
 
   public signup(data: { username: string, email: string, password: string}): Observable<any> {
     return this.http.post('http://localhost:1337/auth/local/register', data);
+  }
+
+  public deleteTeam(id): Observable<any> {
+    return this.http.delete('http://localhost:1337/teams/' + id);
   }
 }

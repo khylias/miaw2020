@@ -10,7 +10,12 @@
             Le nom doit comporter au minimum {{ form.get('name').getError('minlength').requiredLength }} caractères.
         </mat-error>
     </mat-form-field>
-    <div formArrayName="players">
+    <mat-form-field appearance="outline">
+        <mat-label for="cover">Bannière</mat-label>
+        <input matInput #coverInput type="text" id="cover" formControlName="cover">
+        <img [src]="coverInput.value" alt="">
+    </mat-form-field>
+    <!-- <div formArrayName="players">
         <div *ngFor="let playerGroup of players.controls; let i = index;" [formGroup]="playerGroup">
             <mat-form-field appearance="outline">
                 <mat-label for="firstName">Prénom</mat-label>
@@ -23,10 +28,14 @@
             </mat-form-field>
             <button mat-flat-button color="primary" type="button" (click)="removePlayer(i)">Supprimer</button>
         </div>
-    </div>
+    </div> -->
 
-    <app-player-item [player]="player" *ngFor="let player of availablePlayers"></app-player-item>
-    <button mat-flat-button color="primary" type="button" (click)="addPlayer()">Ajouter</button>
+    <div class="players">
+        <app-player-item [player]="player" class="player-item" *ngFor="let player of availablePlayers;" [isSelected]="isInTeam(player.id)">
+        </app-player-item>
+    </div>
+    <!-- <button mat-flat-button color="primary" type="button" (click)="addPlayer()">Ajouter</button> -->
 
     <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Valider</button>
+    <button mat-flat-button color="warn" type="button" (click)="delete()">Supprimer</button>
 </form>

@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { ApiService, FormManagerService, TokenStorageService, AppInterceptorServ
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { Ng2Webstorage } from '@rars/ngx-webstorage';
 import { AuthGuard } from './guards';
+import { AccountComponent } from './components/account/account.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -39,7 +41,8 @@ registerLocaleData(localeFr, 'fr');
     TeamFormComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AccountComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +63,7 @@ registerLocaleData(localeFr, 'fr');
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatToolbarModule,
   ],
   providers: [
     ApiService,

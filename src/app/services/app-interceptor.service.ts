@@ -24,10 +24,11 @@ import * as _ from 'lodash';
 
     return next.handle(req).pipe(
       catchError((err: any) => {
+        console.log(err);
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             this.tokenStorageService.disconnect();
-            this.router.navigate(['/authentification/connexion']);
+            this.router.navigate(['/connexion']);
           }
 
           return observableThrowError(err);

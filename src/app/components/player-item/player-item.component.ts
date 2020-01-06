@@ -9,8 +9,7 @@ import { FormManagerService } from 'src/app/services';
 })
 export class PlayerItemComponent implements OnInit {
   @Input() player;
-
-  public isSelected = false;
+  @Input() isSelected = false;
 
   constructor(private formManagerService: FormManagerService) { }
 
