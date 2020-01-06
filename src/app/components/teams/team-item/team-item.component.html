@@ -1,9 +1,5 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>{{ team.name }}</mat-card-title>
-    </mat-card-header>
-    <img *ngIf="team.cover" [src]="team.cover">
-    <mat-card-actions>
-        <a mat-flat-button [routerLink]="['/equipe', team.id]">Voir</a>
-    </mat-card-actions>
+<mat-card (click)="navigate()" [ngClass]="{'siimple--pb-0': team.cover }">
+    <mat-card-title>{{ team.name }}</mat-card-title>
+    <mat-card-subtitle>{{ team.players.length }} joueurs</mat-card-subtitle>
+    <img *ngIf="team.cover" [src]="team.cover" mat-card-image alt="">
 </mat-card>

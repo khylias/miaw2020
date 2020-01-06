@@ -1,5 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="outline">
+    <ng-container *ngIf="tokenStorageService.isAuthenticate()">
+        <h2 class="siimple-h2" *ngIf="!isEdition">Créez votre équipe</h2>
+        <h2 class="siimple-h2" *ngIf="isEdition">Modifier votre équipe</h2>
+    </ng-container>
+
+    <mat-form-field appearance="outline" class="siimple--width-25 siimple--display-block">
         <mat-label for="name">Nom de l'équipe</mat-label>
         <input matInput type="text" id="name" formControlName="name">
         <mat-error
@@ -10,11 +15,14 @@
             Le nom doit comporter au minimum {{ form.get('name').getError('minlength').requiredLength }} caractères.
         </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="siimple--width-25 siimple--display-block">
         <mat-label for="cover">Bannière</mat-label>
         <input matInput #coverInput type="text" id="cover" formControlName="cover">
-        <img [src]="coverInput.value" alt="">
     </mat-form-field>
+    <ng-container *ngIf="coverInput.value">
+        <p>Apercu : </p>
+        <img [src]="coverInput.value" class="siimple--display-block siimple--width-50" alt="">
+    </ng-container>
     <!-- <div formArrayName="players">
         <div *ngFor="let playerGroup of players.controls; let i = index;" [formGroup]="playerGroup">
             <mat-form-field appearance="outline">
@@ -30,12 +38,16 @@
         </div>
     </div> -->
 
+    <p class="siimple-h3">Choisissez vos joueurs :</p>
     <div class="players">
-        <app-player-item [player]="player" class="player-item" *ngFor="let player of availablePlayers;" [isSelected]="isInTeam(player.id)">
+        <app-player-item [player]="player" class="player-item" *ngFor="let player of availablePlayers;"
+            [isSelected]="isInTeam(player.id)">
         </app-player-item>
     </div>
     <!-- <button mat-flat-button color="primary" type="button" (click)="addPlayer()">Ajouter</button> -->
 
-    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Valider</button>
-    <button mat-flat-button color="warn" type="button" (click)="delete()">Supprimer</button>
+    <ng-container *ngIf="tokenStorageService.isAuthenticate()">
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" class="siimple--mx-1">Valider</button>
+        <button mat-flat-button color="warn" type="button" (click)="delete()" *ngIf="isEdition" class="siimple--mx-1">Supprimer</button>
+    </ng-container>
 </form>

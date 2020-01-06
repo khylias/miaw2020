@@ -1,6 +1,7 @@
-import { Team } from './../../../models/team';
+import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 
+import { Team } from './../../../models/team';
 @Component({
   selector: 'app-team-item',
   templateUrl: './team-item.component.html',
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TeamItemComponent implements OnInit {
   @Input() team: Team;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  public navigate(): void {
+    this.router.navigate(['/equipe', this.team.id]);
   }
 
 }

@@ -1,0 +1,11 @@
+<section>
+    <div class="cover" [ngStyle]="{'background-image': 'url('+ team.cover +')'}"></div>
+    <h1 class="siimple-h1">{{ team.name }}</h1>
+
+    <h3 class="siimple-h3">Les joueurs</h3>
+
+    <app-player-item *ngFor="let player of team.players" [player]="player"
+        class="siimple--width-25 siimple--display-block siimple--mb-2"></app-player-item>
+
+    <a routerLink="edit" mat-flat-button color="primary" *ngIf="tokenStorageService.isAuthenticate()">Modifier</a>
+</section>

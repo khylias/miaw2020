@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AccountComponent } from './components/account/account.component';
 import { AuthGuard } from './guards';
+import { TeamViewComponent } from './components/teams/team-view/team-view.component';
 
 const routes: Routes = [
   {
@@ -35,8 +36,13 @@ const routes: Routes = [
         component: TeamFormComponent
       },
       {
-        path: ':id',
+        path: ':id/edit',
+        canActivate: [AuthGuard],
         component: TeamFormComponent
+      },
+      {
+        path: ':id',
+        component: TeamViewComponent
       }
     ]
   }

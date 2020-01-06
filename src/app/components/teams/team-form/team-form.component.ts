@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Player } from './../../../models';
-import { ApiService, FormManagerService } from 'src/app/services';
+import { ApiService, FormManagerService, TokenStorageService } from 'src/app/services';
 
 @Component({
   selector: 'app-team-form',
@@ -22,12 +23,12 @@ export class TeamFormComponent implements OnInit {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private router: Router,
-    private formManagerService: FormManagerService) { }
+    public tokenStorageService: TokenStorageService,
+    private formManagerService: FormManagerService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.isEdition = this.route.snapshot.routeConfig.path !== 'nouveau';
-
-    console.log(this.isEdition);
 
     this.getData();
     this.form = this.fb.group({
@@ -51,10 +52,17 @@ export class TeamFormComponent implements OnInit {
     if (this.isEdition) {
       this.apiService.updateTeamById(this.route.snapshot.paramMap.get('id'), this.form.value).subscribe(response => {
         console.log('Team updated !');
+        this.snackBar.open('L\'équipe a bien été modifié !', '', {
+          duration: 4000
+        });
       });
     } else {
       this.apiService.createTeam(this.form.value).subscribe(response => {
         console.log('Team created !');
+        this.router.navigate(['/equipe', response.id]);
+        this.snackBar.open('L\'équipe a bien été créée !', '', {
+          duration: 4000
+        });
       });
     }
   }
