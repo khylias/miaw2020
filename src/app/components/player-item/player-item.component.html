@@ -1,9 +1,19 @@
-<mat-card class="player-item" (click)="selectPlayer()" [ngClass]="{'is-select': isSelected}">
-    <mat-card-header>
+<mat-card #matCard class="player-item" [ngClass]="{'is-select': isSelected}">
+    <mat-card-header (click)="selectPlayer()">
         <div mat-card-avatar class="avatar" [ngStyle]="{'background-image': 'url('+ player.avatar +')'}"></div>
         <mat-card-title class="player-item-title">{{ player.lastName | uppercase }} </mat-card-title>
         <mat-card-subtitle class="player-item-subtitle">{{ player.firstName }} </mat-card-subtitle>
     </mat-card-header>
-    <!-- {{ player.birthdayDate | age }} ans
-    <button mat-flat-button type="button" (click)="selectPlayer()" [appMarkSelect]="isSelected">Choisir</button> -->
+    <mat-card-actions>
+        <button type="button" mat-flat-button (click)="playerInfos.open()">Infos</button>
+    </mat-card-actions>
+    <!-- <button mat-flat-button type="button" id="pickBtn" (click)="selectPlayer()" [appMarkSelect]="isSelected">Choisir</button> -->
 </mat-card>
+
+<ngx-smart-modal identifier="playerInfos" #playerInfos>
+    <h3 class="siimple-h3">{{ player.firstName }} {{ player.lastName | uppercase }}</h3>
+    <img class="avatar-full" [src]="player.avatar" alt="">
+    <p class="siimple-p">Date de naissance : {{ player.birthdayDate | date:'longDate':'':'fr' }} ({{ player.birthdayDate | age }} ans)</p>
+    <p class="siimple-p">Description : {{ player.description }}</p>
+    <p class="siimple-p">Loisirs : {{ player.hobby }}</p>
+</ngx-smart-modal>

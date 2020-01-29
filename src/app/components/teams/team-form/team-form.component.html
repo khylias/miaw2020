@@ -23,7 +23,7 @@
         <p>Apercu : </p>
         <img [src]="coverInput.value" class="siimple--display-block siimple--width-50" alt="">
     </ng-container>
-    <!-- <div formArrayName="players">
+    <div formArrayName="players">
         <div *ngFor="let playerGroup of players.controls; let i = index;" [formGroup]="playerGroup">
             <mat-form-field appearance="outline">
                 <mat-label for="firstName">Prénom</mat-label>
@@ -35,12 +35,15 @@
                 <input matInput type="text" id="lastName" formControlName="lastName">
             </mat-form-field>
             <button mat-flat-button color="primary" type="button" (click)="removePlayer(i)">Supprimer</button>
+
+            {{ form.get('players.controls') | json }}
+            <p *ngIf="form.get('players.controls[i].firstName').hasError('required')">hello</p>
         </div>
-    </div> -->
+    </div>
 
     <p class="siimple-h3">Choisissez vos joueurs :</p>
     <div class="players">
-        <app-player-item [player]="player" class="player-item" *ngFor="let player of availablePlayers;"
+        <app-player-item [player]="player" [useToSelect]="true" class="player-item" *ngFor="let player of availablePlayers;"
             [isSelected]="isInTeam(player.id)">
         </app-player-item>
     </div>
