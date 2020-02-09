@@ -38,7 +38,6 @@ export class TeamFormComponent implements OnInit {
     });
 
     this.formManagerService.selected.subscribe(playerAdded => {
-      console.log(playerAdded);
       this.addPlayer(playerAdded);
     });
   }
@@ -83,7 +82,7 @@ export class TeamFormComponent implements OnInit {
     this.players.removeAt(index);
   }
 
-  private getData(): void {
+  getData(): void {
     this.apiService.getPlayers().subscribe(response => {
       this.availablePlayers = response;
     });
